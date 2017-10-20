@@ -1,6 +1,3 @@
-def nqueens(n)
-  return "-*--\n---*\n*---\n--*-"
-end
 
 def romanNumeral(romanNumeral)
   return "XLII"
