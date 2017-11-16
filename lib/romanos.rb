@@ -5,7 +5,7 @@
 # A Wikipedia define: "Numerais romanos modernos são escritos definindo cada dígito
 # separadamente começando com o dígito mais a esquerda e pulando qualquer dígito com o valor de zero."
 class Romans
-  def self.transforma(input)
+  def transforma(input)
     result = ""
     dec = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
     rom = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
@@ -16,7 +16,7 @@ class Romans
         input -= dec[i]
       end
     end
-    return result
+    result
   end
 end
 # input = gets.chomp.to_i
