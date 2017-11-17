@@ -1,44 +1,43 @@
-def linha_disponivel?(tabuleiro, lin, col, n)
-  for checa_coluna in 0..col
-    return false if tabuleiro[[lin, checa_coluna]] == '* '
+def line_available?(board, lin, col, n)
+  for check_column in 0..col
+    return false if board[[lin, check_column]] == '* '
   end
   1.upto(n) do |j|
-    return false if tabuleiro[[lin+j, col+j]] == '* ' || tabuleiro[[lin-j, col-j]] == '* '
-    return false if tabuleiro[[lin-j, col+j]] == '* ' || tabuleiro[[lin+j, col-j]] == '* '
+    return false if board[[lin+j, col+j]] == '* ' || board[[lin-j, col-j]] == '* '
+    return false if board[[lin-j, col+j]] == '* ' || board[[lin+j, col-j]] == '* '
   end
   true
 end
 
-def n_rainhas?(tabuleiro, coluna, n)
-  if coluna == n
-    return true #Fim
-  end
-  for linha in 0..n-1
-    if linha_disponivel?(tabuleiro, linha, coluna, n)
-      tabuleiro[[linha, coluna]] = '* '
-      return true if n_rainhas?(tabuleiro, coluna + 1, n) #Próximo
-      tabuleiro[[linha, coluna]] = '- '
+def n_queens?(board, column, n)
+  return true if column == n
+   #Fim
+  for line in 0..n-1
+    if line_available?(board, line, column, n)
+      board[[line, column]] = '* '
+      return true if n_queens?(board, column + 1, n) #Próximo
+      board[[line, column]] = '- '
     end
   end
   false
 end
 
-def gera_tabuleiro(n, tabuleiro)
+def generate_board(n, board)
   for lins in 0..n-1
     for cols in 0..n-1
-      tabuleiro[[lins, cols]] = '- '
+      board[[lins, cols]] = '- '
     end
   end
-  tabuleiro
+  board
 end
 
-tabuleiro = Hash.new
+board = Hash.new
 
 puts "Diga um número(entre 4 e 8):"
 n = gets.to_i
 
-gera_tabuleiro(n, tabuleiro)
+generate_board(n, board)
 
-if n_rainhas?(tabuleiro, 0, n)
-  puts tabuleiro.values.join.scan(/......../)
+if n_queens?(board, 0, n)
+  puts board.values.join.scan(/......../)
 end
